@@ -19,11 +19,16 @@
       <div class="top-actions">
         <span class="privacy-pill">Datos privados en este dispositivo</span>
         <button class="btn btn-soft" id="backupBtn">Respaldo</button>
-        <button class="btn btn-primary" id="printBtn">Imprimir álbum</button>
+        <button class="btn btn-primary" id="printBtn">Imprimir</button>
       </div>
     </header>
 
     <main>
+      <section class="print-header print-only">
+        <p id="printBrand">MI ÁLBUM PRENATAL</p>
+        <h1 id="printTitle">Álbum completo</h1>
+        <span id="printSubtitle">Nuestra historia antes de conocerte</span>
+      </section>
       <section class="hero app-screen active-screen" id="inicio" data-screen="inicio">
         <div class="hero-copy">
           <p class="eyebrow">ÁLBUM PRENATAL</p>
@@ -85,6 +90,13 @@
 
       <section class="section profile-section app-screen" id="perfil" data-screen="perfil">
         <div class="section-heading"><div><p class="eyebrow">NUESTRA FAMILIA</p><h2>Datos del embarazo</h2></div><button class="btn btn-outline no-print" id="editProfileBtn">Editar datos</button></div>
+        <div class="theme-picker no-print" aria-label="Elegir tema del bebé">
+          <div><small>Personalización</small><strong>¿Quién viene en camino?</strong></div>
+          <div class="ios-segment" role="group" aria-label="Sexo del bebé">
+            <button type="button" data-gender="boy">Hombrecito</button>
+            <button type="button" data-gender="girl">Mujercita</button>
+          </div>
+        </div>
         <div class="profile-card" id="profileSummary"></div>
         <div class="medical-note"><strong>Importante</strong><p>Esta aplicación organiza recuerdos y datos anotados por la familia. No interpreta resultados ni reemplaza la evaluación, indicaciones o historia clínica del profesional de salud.</p></div>
       </section>
@@ -107,7 +119,7 @@
         <div class="modal-head"><div><p class="eyebrow">PRIMEROS DATOS</p><h2>Personaliza el álbum</h2></div><button value="cancel" class="icon-btn" aria-label="Cerrar">×</button></div>
         <div class="form-grid">
           <label>Nombre del bebé<input name="babyName" placeholder="Nuestro bebé" /></label>
-          <fieldset class="gender-field full"><legend>¿Quién viene en camino?</legend><label class="gender-option"><input name="babyGender" type="radio" value="boy" checked /><span class="gender-icon">♂</span><strong>Hombrecito</strong><small>Tema cielo y azul petróleo</small></label><label class="gender-option"><input name="babyGender" type="radio" value="girl" /><span class="gender-icon">♀</span><strong>Mujercita</strong><small>Tema rosa arcilla y ciruela</small></label></fieldset>
+          <label class="full">¿Quién viene en camino?<select name="babyGender" id="babyGenderSelect"><option value="boy">Hombrecito · tema azul</option><option value="girl">Mujercita · tema rosa</option></select><small>También puedes cambiarlo directamente desde Perfil.</small></label>
           <label>Nombre de mamá<input name="motherName" placeholder="Mamá" /></label>
           <label>Nombre de papá / acompañante<input name="partnerName" placeholder="Papá" /></label>
           <label>Centro o clínica<input name="clinic" placeholder="Clínica o centro de salud" /></label>
@@ -170,6 +182,21 @@
         <div class="modal-head"><div><p class="eyebrow">SEGURIDAD</p><h2>Respaldo de la historia</h2></div><button class="icon-btn" data-close="backupDialog" aria-label="Cerrar">×</button></div>
         <p class="modal-copy">Descarga una copia completa para no perder tus datos si cambias o limpias el dispositivo.</p>
         <div class="backup-options"><button class="backup-card" id="exportBtn"><strong>Descargar respaldo</strong><span>Guarda datos, notas y fotos en un archivo.</span></button><label class="backup-card"><strong>Restaurar respaldo</strong><span>Importa un archivo generado por esta app.</span><input id="importInput" type="file" accept="application/json" hidden /></label></div>
+      </div>
+    </dialog>
+
+    <dialog id="printDialog" class="action-sheet">
+      <div class="modal-form">
+        <div class="sheet-handle" aria-hidden="true"></div>
+        <div class="modal-head"><div><p class="eyebrow">IMPRESIÓN</p><h2>¿Qué deseas imprimir?</h2></div><button class="icon-btn" data-close="printDialog" aria-label="Cerrar">×</button></div>
+        <p class="modal-copy">Cada opción prepara únicamente la información elegida, sin páginas vacías.</p>
+        <div class="print-options">
+          <button data-print="full"><span class="option-icon">▤</span><span><strong>Álbum completo</strong><small>Portada, resumen, citas, controles y recuerdos</small></span><b>›</b></button>
+          <button data-print="summary"><span class="option-icon">⌂</span><span><strong>Solo resumen</strong><small>Panorama general del embarazo</small></span><b>›</b></button>
+          <button data-print="appointments"><span class="option-icon">□</span><span><strong>Solo citas</strong><small>Agenda y notas de controles</small></span><b>›</b></button>
+          <button data-print="controls"><span class="option-icon">↗</span><span><strong>Solo controles</strong><small>Medidas y evolución prenatal</small></span><b>›</b></button>
+          <button data-print="memories"><span class="option-icon">♡</span><span><strong>Solo álbum</strong><small>Fotos, ecografías y recuerdos</small></span><b>›</b></button>
+        </div>
       </div>
     </dialog>
 
