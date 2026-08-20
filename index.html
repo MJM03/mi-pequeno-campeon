@@ -10,11 +10,11 @@
     <link rel="icon" href="icon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="styles.css" />
   </head>
-  <body>
+  <body data-theme="boy">
     <header class="topbar no-print">
       <a class="brand" href="#inicio" aria-label="Ir al inicio">
         <span class="brand-mark">M</span>
-        <span><strong>Mi Pequeño Campeón</strong><small>Nuestra historia antes de conocerte</small></span>
+        <span><strong id="appBrandName">Mi Pequeño Campeón</strong><small>Álbum prenatal familiar</small></span>
       </a>
       <div class="top-actions">
         <span class="privacy-pill">Datos privados en este dispositivo</span>
@@ -24,7 +24,7 @@
     </header>
 
     <main>
-      <section class="hero" id="inicio">
+      <section class="hero app-screen active-screen" id="inicio" data-screen="inicio">
         <div class="hero-copy">
           <p class="eyebrow">ÁLBUM PRENATAL</p>
           <h1>Un lugar para guardar<br /><em>cada paso hasta ti.</em></h1>
@@ -50,7 +50,7 @@
         <a href="#resumen" class="active">Resumen</a><a href="#citas">Citas</a><a href="#evolucion">Evolución</a><a href="#recuerdos">Recuerdos</a><a href="#perfil">Perfil</a>
       </nav>
 
-      <section class="section" id="resumen">
+      <section class="section app-screen" id="resumen" data-screen="inicio">
         <div class="section-heading"><div><p class="eyebrow">PANORAMA</p><h2>Nuestra espera, de un vistazo</h2></div><p>La información se actualiza con cada registro.</p></div>
         <div class="stats-grid">
           <article class="stat-card"><span class="stat-icon">◷</span><div><small>Próxima cita</small><strong id="nextAppointment">Sin registrar</strong><p id="nextAppointmentDetail">Agrega tu siguiente control</p></div></article>
@@ -64,12 +64,12 @@
         </article>
       </section>
 
-      <section class="section" id="citas">
+      <section class="section app-screen" id="citas" data-screen="citas">
         <div class="section-heading"><div><p class="eyebrow">AGENDA</p><h2>Próximas citas</h2></div><button class="btn btn-outline no-print" data-open="appointment">+ Nueva cita</button></div>
         <div id="appointmentsList" class="timeline empty-state"></div>
       </section>
 
-      <section class="section" id="evolucion">
+      <section class="section app-screen" id="evolucion" data-screen="evolucion">
         <div class="section-heading"><div><p class="eyebrow">SEGUIMIENTO</p><h2>Evolución prenatal</h2></div><button class="btn btn-outline no-print" data-open="measurement">+ Registrar control</button></div>
         <div class="chart-card">
           <div class="chart-head"><div><strong>Peso de mamá</strong><small>Registro por fecha</small></div><span id="chartDelta">Sin datos</span></div>
@@ -78,25 +78,36 @@
         <div id="measurementsList" class="records-grid"></div>
       </section>
 
-      <section class="section" id="recuerdos">
+      <section class="section app-screen" id="recuerdos" data-screen="recuerdos">
         <div class="section-heading"><div><p class="eyebrow">MEMORIAS</p><h2>Momentos que queremos guardar</h2></div><button class="btn btn-outline no-print" data-open="memory">+ Nuevo recuerdo</button></div>
         <div id="memoriesGrid" class="memories-grid"></div>
       </section>
 
-      <section class="section profile-section" id="perfil">
+      <section class="section profile-section app-screen" id="perfil" data-screen="perfil">
         <div class="section-heading"><div><p class="eyebrow">NUESTRA FAMILIA</p><h2>Datos del embarazo</h2></div><button class="btn btn-outline no-print" id="editProfileBtn">Editar datos</button></div>
         <div class="profile-card" id="profileSummary"></div>
         <div class="medical-note"><strong>Importante</strong><p>Esta aplicación organiza recuerdos y datos anotados por la familia. No interpreta resultados ni reemplaza la evaluación, indicaciones o historia clínica del profesional de salud.</p></div>
       </section>
     </main>
 
-    <footer><span>Mi Pequeño Campeón</span><p>Hecho con amor para una historia que recién comienza.</p></footer>
+    <footer><span id="footerBrand">Mi Pequeño Campeón</span><p>Hecho con amor para una historia que recién comienza.</p></footer>
+
+    <button class="fab no-print" id="fabBtn" aria-label="Agregar registro"><span>＋</span></button>
+    <nav class="bottom-nav no-print" aria-label="Navegación principal">
+      <button class="active" data-tab="inicio" aria-label="Inicio"><span>⌂</span><small>Inicio</small></button>
+      <button data-tab="citas" aria-label="Citas"><span>□</span><small>Citas</small></button>
+      <button data-tab="evolucion" aria-label="Evolución"><span>↗</span><small>Control</small></button>
+      <button data-tab="recuerdos" aria-label="Recuerdos"><span>♡</span><small>Álbum</small></button>
+      <button data-tab="perfil" aria-label="Perfil"><span>○</span><small>Perfil</small></button>
+    </nav>
+    <div class="toast no-print" id="toast" role="status" aria-live="polite"></div>
 
     <dialog id="profileDialog">
       <form method="dialog" id="profileForm" class="modal-form">
         <div class="modal-head"><div><p class="eyebrow">PRIMEROS DATOS</p><h2>Personaliza el álbum</h2></div><button value="cancel" class="icon-btn" aria-label="Cerrar">×</button></div>
         <div class="form-grid">
           <label>Nombre del bebé<input name="babyName" placeholder="Nuestro bebé" /></label>
+          <fieldset class="gender-field full"><legend>¿Quién viene en camino?</legend><label class="gender-option"><input name="babyGender" type="radio" value="boy" checked /><span class="gender-icon">♂</span><strong>Hombrecito</strong><small>Tema cielo y azul petróleo</small></label><label class="gender-option"><input name="babyGender" type="radio" value="girl" /><span class="gender-icon">♀</span><strong>Mujercita</strong><small>Tema rosa arcilla y ciruela</small></label></fieldset>
           <label>Nombre de mamá<input name="motherName" placeholder="Mamá" /></label>
           <label>Nombre de papá / acompañante<input name="partnerName" placeholder="Papá" /></label>
           <label>Centro o clínica<input name="clinic" placeholder="Clínica o centro de salud" /></label>
@@ -111,7 +122,7 @@
 
     <dialog id="appointmentDialog">
       <form method="dialog" id="appointmentForm" class="modal-form">
-        <div class="modal-head"><div><p class="eyebrow">AGENDA</p><h2>Nueva cita</h2></div><button value="cancel" class="icon-btn" aria-label="Cerrar">×</button></div>
+        <div class="modal-head"><div><p class="eyebrow">AGENDA</p><h2 id="appointmentModalTitle">Nueva cita</h2></div><button value="cancel" class="icon-btn" aria-label="Cerrar">×</button></div>
         <div class="form-grid">
           <label>Fecha<input name="date" type="date" required /></label><label>Hora<input name="time" type="time" /></label>
           <label>Tipo de cita<select name="type"><option>Control prenatal</option><option>Ecografía</option><option>Análisis de laboratorio</option><option>Consulta especializada</option><option>Preparación para el parto</option><option>Otro</option></select></label>
@@ -125,7 +136,7 @@
 
     <dialog id="measurementDialog">
       <form method="dialog" id="measurementForm" class="modal-form">
-        <div class="modal-head"><div><p class="eyebrow">CONTROL</p><h2>Registrar evolución</h2></div><button value="cancel" class="icon-btn" aria-label="Cerrar">×</button></div>
+        <div class="modal-head"><div><p class="eyebrow">CONTROL</p><h2 id="measurementModalTitle">Registrar evolución</h2></div><button value="cancel" class="icon-btn" aria-label="Cerrar">×</button></div>
         <div class="form-grid">
           <label>Fecha<input name="date" type="date" required /></label><label>Semana gestacional<input name="week" type="number" min="1" max="42" placeholder="Ej. 26" /></label>
           <label>Peso de mamá (kg)<input name="motherWeight" type="number" min="20" max="250" step="0.1" placeholder="Ej. 64.5" /></label>
@@ -142,11 +153,12 @@
 
     <dialog id="memoryDialog">
       <form method="dialog" id="memoryForm" class="modal-form">
-        <div class="modal-head"><div><p class="eyebrow">RECUERDO</p><h2>Guardar un momento</h2></div><button value="cancel" class="icon-btn" aria-label="Cerrar">×</button></div>
+        <div class="modal-head"><div><p class="eyebrow">RECUERDO</p><h2 id="memoryModalTitle">Guardar un momento</h2></div><button value="cancel" class="icon-btn" aria-label="Cerrar">×</button></div>
         <div class="form-grid">
           <label>Fecha<input name="date" type="date" required /></label><label>Semana (opcional)<input name="week" type="number" min="1" max="42" /></label>
           <label class="full">Título<input name="title" required placeholder="Ej. Hoy escuchamos tu corazón" /></label>
-          <label class="full">Foto o ecografía<input name="photo" type="file" accept="image/*" /><small>Se guarda solo en este dispositivo.</small></label>
+          <label class="full">Foto o ecografía<input name="photo" type="file" accept="image/*" /><small>La optimizamos y guardamos solo en este dispositivo.</small></label>
+          <label class="remove-photo full" id="removePhotoRow"><input name="removePhoto" type="checkbox" /> Quitar la foto actual</label>
           <label class="full">Nuestra nota<textarea name="text" placeholder="¿Qué sentimos? ¿Qué pasó ese día?"></textarea></label>
         </div>
         <div class="modal-actions"><button value="cancel" class="btn btn-soft">Cancelar</button><button value="default" class="btn btn-primary">Guardar recuerdo</button></div>
