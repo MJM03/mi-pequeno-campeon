@@ -7,13 +7,16 @@
 ## Funciones
 
 - Cálculo de semana gestacional y cuenta regresiva mediante fecha probable de parto.
+- Tema visual dinámico para hombrecito o mujercita.
+- Experiencia móvil tipo app con navegación inferior y botón de acción rápida.
 - Agenda de controles, ecografías, análisis y otras citas.
 - Registro de peso materno, presión arterial, altura uterina, frecuencia fetal y medidas estimadas del bebé.
 - Galería de fotos, ecografías y notas familiares.
+- Edición posterior de cada cita, control y recuerdo.
 - Vista tipo álbum preparada para imprimir o guardar como PDF.
 - Respaldo y restauración en JSON.
 - PWA instalable y disponible sin conexión tras la primera carga.
-- Privacidad por diseño: los datos se guardan en el navegador del dispositivo.
+- Privacidad por diseño: los datos se guardan en una base local del dispositivo y las fotos se optimizan antes de guardarse.
 
 ## Uso local
 
